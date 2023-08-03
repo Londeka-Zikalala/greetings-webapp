@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>greetings-page</title>
+    <link rel="stylesheet" href="css/greet.css">
+    
+  </head>
+  <body>
+   <div class="container">
+    <div class="row">
+    <div class="col-2 heading">
+        <h1>Greetings</h1>
+    </div>
+    <div class=" col-2 errorMessage">
+        <h4></h4>
+    </div>
+    <div class=" col-2 input-greet">
+        <label for="name">Enter Name</label>
+              <input type="text" name="" value="" placeholder="eg: Londeka" class="input-box">
+              <div class="counter">
+                <p>Greetings Counter: <span class="counter"></span></p>
+              </div>
+             
+    </div>
+    <div class="col-2 languages">
+        <label class="Swati">
+            <input type="radio" name="chooseLanguage" class="chooseLanguageRadio" value="Swati">
+            <span class="label-body">Swati</span>
+          </label>
+          <label class="English">
+            <input type="radio" name="chooseLanguage" class="chooseLanguageRadio" value="English">
+            <span class="label-body" >English</span>
+          </label>
+          <label class="Sotho">
+            <input type="radio" name="chooseLanguage" class="chooseLanguageRadio" value="Sotho">
+            <span class="label-body" >Sotho</span>
+          </label>
+    </div>
+    
+    <div class=" col-2 Greetmessage">
+        <h4 class="message"><span></span></h4>
+    </div>
+    <div class=" col-2 alert">
+      <h4 class="alert"><span></span></h4>
+  </div>
+
+    <div class=" col-2 buttons">
+      <button class="button-primary greetBtn" type="button" name="button" >Greet</button>
+        <button class="button-primary resetButton" type="button" name="button" >Reset</button>
+    </div>
+   </div>
+   </div>
+   <h6> <a href="tests/greet-mocha.html">tests</a></h6>
+   <script src="js/greet.js" charset="utf-8"></script>
+   <script src="js/greet-DOM.js" charset="utf-8"></script>
+   
+  </body>
+  </html>

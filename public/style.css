@@ -1,0 +1,108 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  overflow: hidden; 
+}
+
+.container {
+  width: 25em;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: floralwhite;
+}
+
+/*.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px; 
+  margin-left: 30px; 
+  padding-left: 20px; 
+}
+*/
+.col-2 {
+  width: 20em;
+  padding: 1%;
+}
+
+a {
+  text-decoration: none;
+  color: burlywood;
+}
+
+.button-primary,
+input[type="text"].button-primary,
+input[type="button"].button-primary {
+  color: #fff;
+  background-color: orangered;
+  border-color: orange;
+  border-radius: 1em;
+}
+
+.buttons {
+  margin-left: 15%;
+}
+
+.errorMessage {
+  color: red;
+}
+
+.message {
+  color: darkslategrey;
+}
+
+.languages {
+  display: inline-flex;
+  margin: 2%;
+}
+
+.alert {
+  display: none;
+  color: green;
+  margin-top: 10px; 
+}
+
+/* Small screens */
+@media only screen and (max-width: 34em) {
+  .container {
+    width: 85%;
+    height: 40%;
+    margin-inline: 15%;
+    margin-block: 5%;
+  }
+
+  .col-2,.row {
+    max-width: 90%;
+  }
+}
+
+/* Medium screens */
+@media only screen and (min-width: 35em) {
+  .container {
+    max-width: 80%;
+    margin-inline: 35%;
+    margin-block: 5%;
+  }
+
+  .col-2 {
+    max-width: 90%;
+  }
+}
+
+/* Large screens */
+@media only screen and (min-width: 55em) {
+  .container {
+    max-width: 85%;
+    margin-inline: 35%;
+    margin-block: 5%;
+  }
+
+  .col-2 {
+    max-width: 100%;
+  }
+}
