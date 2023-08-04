@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>greetings-page</title>
-    <link rel="stylesheet" href="css/greet.css">
+    <link rel="stylesheet" href="../style.css">
     
   </head>
   <body>
@@ -24,7 +24,8 @@
              
     </div>
     <div class="col-2 languages">
-        <label class="Swati">
+        <form action="/greet" method="POST">
+         <label class="Swati">
             <input type="radio" name="chooseLanguage" class="chooseLanguageRadio" value="Swati">
             <span class="label-body">Swati</span>
           </label>
@@ -46,14 +47,15 @@
   </div>
 
     <div class=" col-2 buttons">
-      <button class="button-primary greetBtn" type="button" name="button" >Greet</button>
-        <button class="button-primary resetButton" type="button" name="button" >Reset</button>
+      <button class="button-primary greetBtn" type="button" name="submit" >Greet</button>
+        <button class="button-primary resetButton" type="submit" name="button" >Reset</button>
     </div>
+        
+        
+        </form>
+       
    </div>
    </div>
-   <h6> <a href="tests/greet-mocha.html">tests</a></h6>
-   <script src="js/greet.js" charset="utf-8"></script>
-   <script src="js/greet-DOM.js" charset="utf-8"></script>
    
   </body>
   </html>

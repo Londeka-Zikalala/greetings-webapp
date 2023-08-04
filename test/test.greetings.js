@@ -1,3 +1,5 @@
+import Greeting from "../js/greetings";
+
 describe('The greetings function', function(){
     it('should input word strings only', function(){
         var greeter = Greeting();

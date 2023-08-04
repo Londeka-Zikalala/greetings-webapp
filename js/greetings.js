@@ -1,4 +1,4 @@
-function Greeting() {
+export default function Greeting() {
     var alreadyGreeted = {};
     var greetingsCounter = 0;
   
