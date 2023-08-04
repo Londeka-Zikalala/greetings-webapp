@@ -1,5 +1,5 @@
 import assert from "assert";
-import Greeting from "../js/greetings";
+import Greeting from "../js/greetings.js";
 
 describe('The greetings function', function(){
     it('should input word strings only', function(){
