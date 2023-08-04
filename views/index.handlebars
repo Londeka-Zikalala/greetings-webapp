@@ -39,20 +39,21 @@
           </label>
     </div>
     
-    <div class=" col-2 Greetmessage">
-        <h4 class="message"><span></span></h4>
+    <div class=" col-2 buttons">
+      <button class="button-primary greetBtn" type="submit" name="submit" >Greet</button>
+        <button class="button-primary resetButton" type="submit" name="submit" >Reset</button>
+    </div>
+        </form>
+
+        <div class=" col-2 Greetmessage">
+        <h4 class="message"><span>{{message}}</span></h4>
+        {{#if timesGreeted}}<p> Greeted {{name}} {{timesGreeted}} times
+
+        </p>{{/if}}
     </div>
     <div class=" col-2 alert">
       <h4 class="alert"><span></span></h4>
   </div>
-
-    <div class=" col-2 buttons">
-      <button class="button-primary greetBtn" type="button" name="submit" >Greet</button>
-        <button class="button-primary resetButton" type="submit" name="button" >Reset</button>
-    </div>
-        
-        
-        </form>
        
    </div>
    </div>

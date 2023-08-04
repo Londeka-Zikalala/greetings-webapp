@@ -17,6 +17,9 @@ export default function Greeting() {
       return true; 
     }
   
+    function getGreetedName(){
+        return  transformedName;
+    }
     function greetFunction(name, language) {
       var transformedName = inputString(name);
       if (language === 'Swati') {
@@ -56,6 +59,7 @@ export default function Greeting() {
     return {
       inputString,
       greetedFunction,
+      getGreetedName,
       greetFunction,
       getCounter,
       errorMessages,
