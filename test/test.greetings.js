@@ -1,3 +1,4 @@
+import assert from "assert";
 import Greeting from "../js/greetings";
 
 describe('The greetings function', function(){

@@ -12,13 +12,13 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 //handlebars engine
-app.engine('handlebars' , engine);
+app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 //public static
 app.use(express.static('public'));
 
-//root route
+//root route  
 app.get('/', (req,res)=>{
     res.render('index')
 });
