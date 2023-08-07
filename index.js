@@ -19,7 +19,7 @@ app.set('views', './views');
 app.use(express.static('public'));
 
 //root route  
-app.get('/', (req,res)=>{
+app.get('/greet', (req,res)=>{
     res.render('index')
 });
 
@@ -27,7 +27,10 @@ app.post('/', (req,res) => {
     const name = req.body.name;
     const language = req.body.chooseLanguage;
     const message = greeting.greetFunction(name, language);
+    const timesGreeted = greeting.getCounter()
     res.render('index',{
+        name,
+        timesGreeted,
         message})
 });
 

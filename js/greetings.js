@@ -1,14 +1,15 @@
 export default function Greeting() {
     var alreadyGreeted = {};
     var greetingsCounter = 0;
+    var transformedName = '';
   
     function inputString(name) {
       const regex = /^[a-zA-Z]+$/i;
-      return typeof name === 'string' && name.trim() !== '' && regex.test(name.trim()) ? name.toLowerCase() : '';
+      transformedName = typeof name === 'string' && name.trim() !== '' && regex.test(name.trim()) ? name.toLowerCase() : '';
+      return transformedName 
     }
   
-    function greetedFunction(name) {
-      var transformedName = inputString(name);
+    function greetedFunction(transformedName) {
       if (!alreadyGreeted[transformedName]) {
         alreadyGreeted[transformedName] = true;
         greetingsCounter++;
@@ -20,8 +21,9 @@ export default function Greeting() {
     function getGreetedName(){
         return  transformedName;
     }
+
     function greetFunction(name, language) {
-      var transformedName = inputString(name);
+     inputString(name);
       if (language === 'Swati') {
           return 'Sawubona ' + transformedName;
         } else if (language === 'English') {
@@ -32,7 +34,7 @@ export default function Greeting() {
       }
   
     function errorMessages(name, language) {
-      var transformedName = inputString(name);
+      inputString(name);
       if (!transformedName && language === "") {
         return "Select a language and enter a valid string (No numbers or charecters)";
       } 
