@@ -17,25 +17,35 @@ describe('The greetings function', function(){
     })
     it('should greet any name in Swati', function(){
         var greeter = Greeting();
-        assert.equal(greeter.greetFunction('Londeka', 'Swati'), 'Sawubona londeka')
-        assert.equal(greeter.greetFunction('Nate', 'Swati'), 'Sawubona nate')
-        assert.equal(greeter.greetFunction('Nsovo', 'Swati'), 'Sawubona nsovo')
-    })
+        assert.deepEqual(greeter.greetFunction('Londeka', 'Swati'), {errorMessage: "",
+    message: 'Sawubona londeka'} )
+        assert.deepEqual(greeter.greetFunction('Nate', 'Swati'), {errorMessage: "",
+        message: 'Sawubona nate'} )
+        assert.deepEqual(greeter.greetFunction('Nsovo', 'Swati'), {errorMessage: "",
+        message: 'Sawubona nsovo'} )
+    });
 
     it('should greet any name in Sotho', function(){
         var greeter = Greeting();
-        assert.equal(greeter.greetFunction('Londeka', 'Sotho'), 'Dumela londeka')
-        assert.equal(greeter.greetFunction('Nate', 'Sotho'), 'Dumela nate')
-        assert.equal(greeter.greetFunction('Nsovo', 'Sotho'), 'Dumela nsovo')
+        assert.deepEqual(greeter.greetFunction('Londeka', 'Sotho'), {errorMessage: "",
+        message: 'Dumela londeka'} )
+            assert.deepEqual(greeter.greetFunction('Nate', 'Sotho'), {errorMessage: "",
+            message: 'Dumela nate'} )
+            assert.deepEqual(greeter.greetFunction('Nsovo', 'Sotho'), {errorMessage: "",
+            message: 'Dumela nsovo'} )
 
 
     })
 
     it('should greet any name in English',function(){
         var greeter = Greeting();
-        assert.equal(greeter.greetFunction('Londeka', 'English'), 'Hello londeka')
-        assert.equal(greeter.greetFunction('Nate', 'English'), 'Hello nate')
-        assert.equal(greeter.greetFunction('Nsovo', 'English'), 'Hello nsovo')
+
+        assert.deepEqual(greeter.greetFunction('Londeka', 'English'), {errorMessage: "",
+        message: 'Hello londeka'} )
+            assert.deepEqual(greeter.greetFunction('Nate', 'English'), {errorMessage: "",
+            message: 'Hello nate'} )
+            assert.deepEqual(greeter.greetFunction('Nsovo', 'English'), {errorMessage: "",
+            message: 'Hello nsovo'} )
 
     })
     })

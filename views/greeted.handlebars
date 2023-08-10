@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+</head>
+<body>
+    <h1>Greeted users</h1>
+    <table>
+        <tr>
+            <th>USERNAMES:</th>
+        </tr>
+        {{#each greeted}}
+        <tr>
+            <td><a href="/counter/{{{@key}}}">{{@key}}</a></td>
+        </tr>
+        {{/each}}
+    </table>
+</body>
+</html>

@@ -1,65 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>greetings-page</title>
-    <link rel="stylesheet" href="../style.css">
-    
-  </head>
-  <body>
-   <div class="container">
+
+<head>
+  <meta charset="utf-8">
+  <title>greetings-page</title>
+  <link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+  <div class="container">
     <div class="row">
-    <div class="col-2 heading">
+      <div class="col-2 heading">
         <h1>Greetings</h1>
-    </div>
-    <div class=" col-2 errorMessage">
-        <h4></h4>
-    </div>
-<form action="/greet" method="POST">
-<div class=" col-2 input-greet">
+      </div>
+      <div class=" col-2 errorMessage">
+        <h4>{{errorMessage}}</h4>
+      </div>
+      <form action="/greet" method="POST">
+      <div class=" col-2 input-greet">
         <label for="name">Enter Name</label>
-              <input type="text" name="name" value="{{name}}" placeholder="eg: Londeka" class="input-box">
-              <div class="counter">
-                <p>Greetings Counter: <span class="counter">{{timesGreeted}}</span></p>
-              </div>
-             
-    </div>
-    
-    <div class="col-2 languages">
-        <form action="/greet" method="POST">
-         <label class="Swati">
-            <input type="radio" name="chooseLanguage" class="chooseLanguageRadio" value="Swati">
-            <span class="label-body">Swati</span>
-          </label>
-          <label class="English">
-            <input type="radio" name="chooseLanguage" class="chooseLanguageRadio" value="English">
-            <span class="label-body" >English</span>
-          </label>
-          <label class="Sotho">
-            <input type="radio" name="chooseLanguage" class="chooseLanguageRadio" value="Sotho">
-            <span class="label-body" >Sotho</span>
-          </label>
-    </div>
-    
-    <div class=" col-2 buttons">
-      <button class="button-primary greetBtn" type="submit" name="submit" >Greet</button>
-      <button class="button-primary resetButton" type="submit" name="submit" >Reset</button>
-</div>
-    </div>
-
-        <div class=" col-2 Greetmessage">
+        <input type="text" name="name" value="{{name}}" placeholder="eg: Londeka" class="input-box">
+        <div class="counter">
+          <p><a href="/greeted">Greetings</a><span class="counter">{{timesGreeted}}</span></p>
+        </div>
+      </div>
+      <div class="col-2 languages">
+        <label class="Swati">
+          <input type="radio" name="chooseLanguage" class="chooseLanguageRadio" value="Swati">
+          <span class="label-body">Swati</span>
+        </label>
+        <label class="English">
+          <input type="radio" name="chooseLanguage" class="chooseLanguageRadio" value="English">
+          <span class="label-body">English</span>
+        </label>
+        <label class="Sotho">
+          <input type="radio" name="chooseLanguage" class="chooseLanguageRadio" value="Sotho">
+          <span class="label-body">Sotho</span>
+        </label>
+      </div>
+      <div class=" col-2 Greetmessage">
+       
         <h4 class="message"><span>{{message}}</span></h4>
-        {{#if timesGreeted}}<p> Greeted {{name}} {{timesGreeted}} times
-
-        </p>{{/if}}
+      </div>
+      <div class=" col-2 alert">
+        <h4 class="alert"><span></span></h4>
+      </div>
+      <div class=" col-2 buttons">
+        <button class="button-primary greetBtn" type="submit" name="submit">Greet</button>
+        </form>
+        <form action="/reset" method="POST">
+          <button class="button-primary resetButton" type="submit" name="reset">Reset</button>
+        </form>
+      </div>
     </div>
-    <div class=" col-2 alert">
-      <h4 class="alert"><span></span></h4>
+
+
+
   </div>
-    </form>   
-   </div>
-   
-   </div>
-   
-  </body>
-  </html>
+</body>
+
+</html>
