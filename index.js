@@ -33,8 +33,9 @@ app.post('/greet', (req, res) => {
     const name = req.body.name;
     const language = req.body.chooseLanguage;
     const {message, errorMessage} = greeting.greetFunction(name, language);
-        greeting.greetedFunction(name);
-        greeting.errorMessages(name, language)
+      if(!errorMessage){
+        greeting.greetedFunction(name)
+    };
     const timesGreeted = greeting.getCounter()
     res.render('index', {
         name,

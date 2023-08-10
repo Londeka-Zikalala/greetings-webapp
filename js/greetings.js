@@ -25,22 +25,25 @@ export default function Greeting() {
   function getGreetedName() {
     return greetedNames;
   }
+
   function errorMessages(name, language) {
     const transformedName = inputString(name);
+    const errorMessage = []; 
     if (!transformedName && language === "") {
-      return "Select a language and enter a valid string (No numbers or charecters)";
+      errorMessage.push("Select a language and enter a valid string (No numbers or charecters)");
     }
     else if (language === "") {
-      return "Please select a language";
+      errorMessage.push("Please select a language");
     }
     else if (!transformedName) {
-      return "Enter a valid string (No numbers or charecters)";
+      errorMessage.push("Enter a valid string (No numbers or charecters)");
     }
     else {
       return "";
     }
+    return errorMessage
   }
-  
+
   function greetFunction(name, language) {
     const transformedName = inputString(name);
     var errorMessage = errorMessages(name,language);
@@ -63,9 +66,9 @@ export default function Greeting() {
 
   function getUserCount(name) {
     const transformedName = inputString(name)
-    greetedFunction(transformedName)
-    return greetedNames[transformedName] || 0
+   return greetedNames[transformedName] || 0
   }
+
   function getCounter() {
     return greetingsCounter;
   }
