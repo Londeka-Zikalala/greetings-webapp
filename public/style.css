@@ -46,6 +46,9 @@ input[type="button"].button-primary {
 
 .buttons {
   margin-left: 15%;
+  display: flex;
+  flex-direction: row;
+  
 }
 
 .errorMessage {
