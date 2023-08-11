@@ -16,6 +16,7 @@ const databaseUrl = process.env.DATABASE_URL;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
 //handlebars engine
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
@@ -23,22 +24,42 @@ app.set('views', './views');
 //public static
 app.use(express.static('public'));
 
+function errorMessageMiddleware(req, res, next){
+    const name = req.body.name;
+    const language = req.body.chooseLanguage;
+    let errorMessage = greeting.greetFunction(name, language)
+
+    if(!name && language=== null ){
+        res.locals.errorMessage = errorMessage;
+        setTimeout(()=>{
+            res.locals.errorMessage = '';
+            next();
+        }, 2000);
+    } else{
+        next();
+    }
+};
 //root route  
-app.get('/', (req, res) => {
+app.get('/', errorMessageMiddleware, (req, res) => {
     res.render('index')
 });
 
 
-app.post('/greet', (req, res) => {
+app.post('/greet', errorMessageMiddleware, (req, res) => {
     const name = req.body.name;
     const language = req.body.chooseLanguage;
-    const {message, errorMessage} = greeting.greetFunction(name, language);
-      if(!errorMessage){
+    const message = greeting.greetFunction(name, language);
+    let errorMessage = greeting.greetFunction(name, language);
+
+    if (name && language==!null ) {
+
         greeting.greetedFunction(name)
+
     };
+
     const timesGreeted = greeting.getCounter()
     res.render('index', {
-        name,
+        name: '',
         timesGreeted,
         message,
         errorMessage
@@ -46,10 +67,10 @@ app.post('/greet', (req, res) => {
     console.log(timesGreeted)
 });
 
-app.get('/counter/:name', (req,res) =>{
+app.get('/counter/:name', (req, res) => {
     const name = req.params.name;
     const timesGreeted = greeting.getUserCount(name);
-    res.render('counter',{
+    res.render('counter', {
         name,
         timesGreeted
     })
@@ -58,13 +79,13 @@ app.get('/counter/:name', (req,res) =>{
 app.get('/greeted', (req, res) => {
 
     const greeted = greeting.getGreetedName();
-   
+
     res.render('greeted', {
         greeted
     })
 });
 
-app.post('/reset', (req,res) =>{
+app.post('/reset', (req, res) => {
     greeting.reset()
 
     res.render('index')

@@ -15,12 +15,10 @@
         <h1>Greetings</h1>
       </div>
       <div class=" col-2 errorMessage">
-        {{#each errorMessage}}
-        <h4>{{this}}</h4>
-        {{/each}}
+        <h4 id="errorMessage">{{errorMessage.errorMessage}}</h4>
       </div>
       <form action="/greet" method="POST">
-      <div class=" col-2 input-greet">
+      <div class="col-2 input-greet">
         <label for="name">Enter Name</label>
         <input type="text" name="name" value="{{name}}" placeholder="eg: Londeka" class="input-box">
         <div class="counter">
@@ -43,7 +41,7 @@
       </div>
       <div class=" col-2 Greetmessage">
        
-        <h4 class="message"><span>{{message}}</span></h4>
+        <h4 class="message"><span>{{message.message}}</span></h4>
       </div>
       <div class=" col-2 alert">
         <h4 class="alert"><span></span></h4>
@@ -57,9 +55,6 @@
     </div>
       </div>
     </div>
-
-
-
   </div>
 </body>
 
