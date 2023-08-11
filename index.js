@@ -27,7 +27,7 @@ app.use(express.static('public'));
 function errorMessageMiddleware(req, res, next){
     const name = req.body.name;
     const language = req.body.chooseLanguage;
-    let errorMessage = greeting.greetFunction(name, language)
+    let errorMessage = greeting.errorMessages(name, language)
 
     if(!name && language=== null ){
         res.locals.errorMessage = errorMessage;
@@ -40,7 +40,7 @@ function errorMessageMiddleware(req, res, next){
     }
 };
 //root route  
-app.get('/', errorMessageMiddleware, (req, res) => {
+app.get('/', (req, res) => {
     res.render('index')
 });
 
@@ -49,9 +49,9 @@ app.post('/greet', errorMessageMiddleware, (req, res) => {
     const name = req.body.name;
     const language = req.body.chooseLanguage;
     const message = greeting.greetFunction(name, language);
-    let errorMessage = greeting.greetFunction(name, language);
+    let errorMessage = greeting.errorMessages(name, language);
 
-    if (name && language==!null ) {
+    if (!errorMessage) {
 
         greeting.greetedFunction(name)
 
