@@ -17,22 +17,16 @@ describe('The greetings function', function(){
     })
     it('should greet any name in Swati', function(){
         var greeter = Greeting();
-        assert.deepEqual(greeter.greetFunction('Londeka', 'Swati'), {errorMessage: "",
-    message: 'Sawubona londeka'} )
-        assert.deepEqual(greeter.greetFunction('Nate', 'Swati'), {errorMessage: "",
-        message: 'Sawubona nate'} )
-        assert.deepEqual(greeter.greetFunction('Nsovo', 'Swati'), {errorMessage: "",
-        message: 'Sawubona nsovo'} )
+        assert.equal(greeter.greetFunction('Londeka', 'Swati'), 'Sawubona londeka' )
+        assert.equal(greeter.greetFunction('Nate', 'Swati'),'Sawubona nate' )
+        assert.equal(greeter.greetFunction('Nsovo', 'Swati'),  'Sawubona nsovo')
     });
 
     it('should greet any name in Sotho', function(){
         var greeter = Greeting();
-        assert.deepEqual(greeter.greetFunction('Londeka', 'Sotho'), {errorMessage: "",
-        message: 'Dumela londeka'} )
-            assert.deepEqual(greeter.greetFunction('Nate', 'Sotho'), {errorMessage: "",
-            message: 'Dumela nate'} )
-            assert.deepEqual(greeter.greetFunction('Nsovo', 'Sotho'), {errorMessage: "",
-            message: 'Dumela nsovo'} )
+        assert.equal(greeter.greetFunction('Londeka', 'Sotho'),'Dumela londeka')
+            assert.equal(greeter.greetFunction('Nate', 'Sotho'), 'Dumela nate' )
+            assert.equal(greeter.greetFunction('Nsovo', 'Sotho'), 'Dumela nsovo' )
 
 
     })
@@ -40,12 +34,9 @@ describe('The greetings function', function(){
     it('should greet any name in English',function(){
         var greeter = Greeting();
 
-        assert.deepEqual(greeter.greetFunction('Londeka', 'English'), {errorMessage: "",
-        message: 'Hello londeka'} )
-            assert.deepEqual(greeter.greetFunction('Nate', 'English'), {errorMessage: "",
-            message: 'Hello nate'} )
-            assert.deepEqual(greeter.greetFunction('Nsovo', 'English'), {errorMessage: "",
-            message: 'Hello nsovo'} )
+        assert.equal(greeter.greetFunction('Londeka', 'English'),'Hello londeka')
+            assert.equal(greeter.greetFunction('Nate', 'English'),'Hello nate')
+            assert.equal(greeter.greetFunction('Nsovo', 'English'), 'Hello nsovo')
 
     })
     })
@@ -54,14 +45,16 @@ describe('The greetings function', function(){
 describe('greeting counters',function(){
     it('should not increment the counter if a name has already been greeted', function(){
         var greeter = Greeting();
+        
+        greeter.greetFunction('Londeka', 'Swati')
+        greeter.greetFunction('Londeka', 'Swati')
         greeter.greetedFunction('Londeka')
-        greeter.greetFunction('Londeka', 'Swati')
-        greeter.greetFunction('Londeka', 'Swati')
 
         assert.equal(greeter.getCounter(), 1)
 
-
     })
+
+
     it('should keep a count of Swati greetings', function(){
         var greeter = Greeting();
         greeter.greetFunction('Nsovo', 'Swati')
@@ -124,18 +117,18 @@ describe('greeting counters',function(){
 describe('error messages', function(){
     it('should give an error message of "Enter a valid string(No numbers or charecters)" when an invalid input is made', function(){
         var greeter = Greeting();
-
-        assert.equal(greeter.errorMessages(1234 , 'Swati'), 'Enter a valid string (No numbers or charecters)')
+        greeter.errorMessages(1234, 'Swati');
+        assert.equal(greeter.getErrorMessage(), 'Enter a valid string (No numbers or charecters)')
     })
     it('should give an error message of "Please select a language" when a language is not selected', function(){
         var greeter = Greeting();
-
-        assert.equal(greeter.errorMessages('Londeka' , ''), 'Please select a language')
+        greeter.errorMessages('Londeka' , undefined);
+        assert.equal(greeter.getErrorMessage(), 'Please select a language')
     })
     it('should give an error message of "Select a language and enter a valid string (No numbers or charecters)" when a language is not selected and an input is not made', function(){
         var greeter = Greeting();
-
-        assert.equal(greeter.errorMessages('' , ''), 'Select a language and enter a valid string (No numbers or charecters)')
+        greeter.errorMessages('' , undefined);
+        assert.equal(greeter.getErrorMessage(), 'Select a language and enter a valid string (No numbers or charecters)')
     })
     
 

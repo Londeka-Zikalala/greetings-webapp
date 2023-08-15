@@ -24,47 +24,48 @@ app.set('views', './views');
 //public static
 app.use(express.static('public'));
 
-function errorMessageMiddleware(req, res, next){
-    const name = req.body.name;
-    const language = req.body.chooseLanguage;
-    let errorMessage = greeting.greetFunction(name, language)
 
-    if(!name && language=== null ){
-        res.locals.errorMessage = errorMessage;
-        setTimeout(()=>{
-            res.locals.errorMessage = '';
-            next();
-        }, 2000);
-    } else{
-        next();
-    }
-};
-//root route  
-app.get('/', errorMessageMiddleware, (req, res) => {
+//root route 
+
+
+app.get('/', (req, res) => {
     res.render('index')
+    
 });
 
 
-app.post('/greet', errorMessageMiddleware, (req, res) => {
+app.post('/greet', (req, res) => {
     const name = req.body.name;
     const language = req.body.chooseLanguage;
+    
     const message = greeting.greetFunction(name, language);
-    let errorMessage = greeting.greetFunction(name, language);
-
-    if (name && language==!null ) {
 
         greeting.greetedFunction(name)
 
-    };
+        greeting.errorMessages(name, language)
+    const  timesGreeted = greeting.getCounter();
+    let errorMessage= greeting.getErrorMessage()
 
-    const timesGreeted = greeting.getCounter()
+    function errorColor(errorMessage){
+        errorMessage = greeting.getErrorMessage()
+        if(errorMessage === 'Select a language and enter a valid string (No numbers or charecters)'){
+            return 'red'
+        } else if(errorMessage === 'Please select a language'){
+            return 'orange'
+        }
+        else{
+            return 'yellow'
+        }
+    }
+    
     res.render('index', {
         name: '',
         timesGreeted,
         message,
-        errorMessage
+        errorMessage,
+        errorClass: errorColor(errorMessage)
+
     })
-    console.log(timesGreeted)
 });
 
 app.get('/counter/:name', (req, res) => {
@@ -74,8 +75,10 @@ app.get('/counter/:name', (req, res) => {
         name,
         timesGreeted
     })
-    console.log(timesGreeted)
+    
 })
+
+
 app.get('/greeted', (req, res) => {
 
     const greeted = greeting.getGreetedName();

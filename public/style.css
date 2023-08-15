@@ -51,10 +51,15 @@ input[type="button"].button-primary {
   
 }
 
-.errorMessage {
+.red {
   color: red;
 }
-
+.orange{
+  color:orangered;
+}
+.yellow{
+  color:yellow;
+}
 .message {
   color: darkslategrey;
 }

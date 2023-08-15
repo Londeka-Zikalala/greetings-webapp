@@ -2,6 +2,9 @@ export default function Greeting() {
   var alreadyGreeted = {};
   var greetedNames = {};
   var greetingsCounter = 0;
+  let errorMessage = '';
+  let message = '';
+  
 
   function inputString(name) {
     const regex = /^[a-zA-Z]+$/i;
@@ -9,76 +12,100 @@ export default function Greeting() {
 
   }
 
-  function greetedFunction(name) {
-    const transformedName = inputString(name)
-    if (!alreadyGreeted[transformedName]) {
-      alreadyGreeted[transformedName] = true;
-      greetedNames[transformedName] = 1;
-      greetingsCounter++;
-
-      return false;
+  function errorMessages(name, language){
+    let transformedName = inputString(name);
+    
+    if (transformedName === "" && language === undefined) {
+      errorMessage = "Select a language and enter a valid string (No numbers or charecters)";
+     
     }
-    greetedNames[transformedName]++
-    return true;
+    else if(transformedName && language === undefined){
+      errorMessage = "Please select a language";
+
+    
+    }
+    else if(!transformedName) {
+      errorMessage = "Enter a valid string (No numbers or charecters)";
+   
+    }
+    
   }
 
-  function getGreetedName() {
-    return greetedNames;
-  }
-
-  function errorMessages(name, language) {
-    const transformedName = inputString(name);
-    const errorMessage = []; 
-    if (!transformedName && language === "") {
-      errorMessage.push("Select a language and enter a valid string (No numbers or charecters)");
-    }
-    else if (language === "") {
-      errorMessage.push("Please select a language");
-    }
-    else if (!transformedName) {
-      errorMessage.push("Enter a valid string (No numbers or charecters)");
-    }
-    else {
-      return "";
-    }
-    return errorMessage
-  }
 
   function greetFunction(name, language) {
     const transformedName = inputString(name);
-    var errorMessage = errorMessages(name,language);
-    var message = "";
-    if(!errorMessage){
-      if (language === 'Swati') {
-        message = 'Sawubona ' + transformedName;
-      } else if (language === 'English') {
-        message = 'Hello ' + transformedName;
-      } else if (language === 'Sotho') {
-        message = 'Dumela ' + transformedName;
+   
+      errorMessage = "";
+      if(name){
+        if (language === 'Swati') {
+          message = 'Sawubona ' + transformedName;
+        } else if (language === 'English') {
+          message = 'Hello ' + transformedName;
+        } else if (language === 'Sotho') {
+          message = 'Dumela ' + transformedName;
+        }
+        else{
+          message = "";
+        }
       }
+     
+      
+    return message
+  };
+  
+  function getErrorMessage(){
+  
+      return errorMessage
+  
+}
+ 
+
+  function greetedFunction(name) {
+
+    const transformedName = inputString(name)
+    if(message){
+      if (!alreadyGreeted[transformedName]) {
+        alreadyGreeted[transformedName] = true;
+        greetedNames[transformedName] = 1;
+        greetingsCounter++;
+  
+        return false;
+      } 
+        greetedNames[transformedName]++;
+  
+      return true;
+   
     }
-    return {
-      message, 
-      errorMessage
-    }
-    }
-    
+  }
+
+
+  function getGreetedName() {
+    return greetedNames;
+  };
+
+
 
   function getUserCount(name) {
+   
     const transformedName = inputString(name)
-   return greetedNames[transformedName] || 0
-  }
+      return greetedNames[transformedName] || 0
+  
+   
+  };
 
   function getCounter() {
-    return greetingsCounter;
-  }
+    
+  return greetingsCounter;
+    
+   
+  };
 
   function reset() {
     greetingsCounter = 0;
     alreadyGreeted = {};
     greetedNames = {};
 
-  }
+  };
 
   return {
     inputString,
@@ -88,6 +115,7 @@ export default function Greeting() {
     getCounter,
     getUserCount,
     errorMessages,
+    getErrorMessage,
     reset
   };
 }
