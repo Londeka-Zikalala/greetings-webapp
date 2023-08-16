@@ -1,4 +1,4 @@
-/*import assert from "assert";
+import assert from "assert";
 import Greeting from "../js/greetings.js";
 import db from "../db.js";
 
@@ -160,5 +160,9 @@ describe('error messages', function(){
 
 
 })*/
+
+after(function () {
+    db.$pool.end();
+  });
 
 

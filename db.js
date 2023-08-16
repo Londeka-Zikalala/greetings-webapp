@@ -1,13 +1,13 @@
-import pgp from 'pg-promise';
+import pgPromise from 'pg-promise';
 import dotenv from 'dotenv';
 dotenv.config();
 
 const connectionString =  {
-    dbURL: process.env.DATABASE_URL
-   // ssl: { rejectUnauthorized: false }
+    dbURL: process.env.DATABASE_URL,
+   ssl: { rejectUnauthorized: false }
 }
 
-const db = pgp()(connectionString);
+const db = pgPromise()(connectionString);
 db.connect();
 export default db
 //Defining Database queries
