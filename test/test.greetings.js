@@ -4,6 +4,12 @@ import db from "../db.js";
 
 
 describe('The greetings function', function(){ 
+  this.timeout(6000);
+  beforeEach(async function () {
+    await db.none(
+      "TRUNCATE TABLE greetings_schema.users RESTART IDENTITY CASCADE;"
+    );
+  });
     it('should keep a count of all greetings', async function(){
         var greeter = Greeting(db);
         greeter.greetFunction('Nsovo', 'Swati')
