@@ -1,11 +1,10 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
 import db from './db.js';
 import Greeting from './js/greetings.js';
 
-dotenv.config();
+
 const app = express();
 
 const greeting = Greeting();
