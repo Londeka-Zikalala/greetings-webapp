@@ -7,7 +7,7 @@ import Greeting from './js/greetings.js';
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 3000;
+
 const greeting = Greeting();
 
 
@@ -120,7 +120,7 @@ app.post('/reset', (req, res) => {
     res.render('index')
 })
 
-
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`)
 });
