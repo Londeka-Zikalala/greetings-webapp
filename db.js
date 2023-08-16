@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const connectionString =  {
-    dbURL: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false }
+    dbURL: process.env.DATABASE_URL
+   // ssl: { rejectUnauthorized: false }
 }
 
 const db = pgp()(connectionString);
