@@ -18,6 +18,9 @@ jobs:
       matrix:
         node-version: [16.x, 18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    env:    
+      DATABASE_URL: postgres://greetings_postgresql_8b6y_user:w0bXwbN9bDoc1VhAHxFQDDtKXwaYqzSH@dpg-cj8dflk5kgrc73fee9j0-a.oregon-postgres.render.com/greetings_postgresql_8b6y?ssl=true
+
 
     steps:
     - uses: actions/checkout@v3
@@ -29,3 +32,6 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+
+      env:
+        DATABASE_URL: postgres://greetings_postgresql_8b6y_user:w0bXwbN9bDoc1VhAHxFQDDtKXwaYqzSH@dpg-cj8dflk5kgrc73fee9j0-a.oregon-postgres.render.com/greetings_postgresql_8b6y?ssl=true

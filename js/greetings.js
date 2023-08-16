@@ -1,4 +1,4 @@
-export default function Greeting() {
+export default function Greeting(db) {
   var alreadyGreeted = {};
   var greetedNames = {};
   var greetingsCounter = 0;
@@ -32,7 +32,8 @@ export default function Greeting() {
   }
 
 
-  function greetFunction(name, language) {
+   function greetFunction(name, language) {
+    
     const transformedName = inputString(name);
    
       errorMessage = "";
@@ -60,10 +61,12 @@ export default function Greeting() {
 }
  
 
-  function greetedFunction(name) {
+  async function greetedFunction(name) {
 
     const transformedName = inputString(name)
     if(message){
+    await db.none('INSERT INTO greetings_schema.users (name, language, timesgreeted) VALUES ($1, $2, $3)', [name, language, 0]);
+
       if (!alreadyGreeted[transformedName]) {
         alreadyGreeted[transformedName] = true;
         greetedNames[transformedName] = 1;
@@ -93,9 +96,12 @@ export default function Greeting() {
    
   };
 
-  function getCounter() {
+ async function getCounter() {
     
-  return greetingsCounter;
+ var dbUsers = await db.oneOrNone("select count(name) from greetings_schema.users")
+ greetingsCounter = dbUsers.count
+ 
+  return greetingsCounter ;
     
    
   };

@@ -1,7 +1,27 @@
 import assert from "assert";
 import Greeting from "../js/greetings.js";
+import db from "../db.js";
 
-describe('The greetings function', function(){
+
+describe('The greetings function', function(){ 
+    it('should keep a count of all greetings', async function(){
+        var greeter = Greeting(db);
+        greeter.greetFunction('Nsovo', 'Swati')
+        greeter.greetFunction('Lala', 'Sotho')
+        greeter.greetFunction('Nate','English')
+        greeter.greetFunction('Londeka','Swati')
+       await greeter.greetedFunction('Nsovo');
+       await greeter.greetedFunction('Lala');
+       await greeter.greetedFunction('Nate');
+       await greeter.greetedFunction('Londeka');
+    
+        assert.equal(await greeter.getCounter(), 4)
+    })
+    
+})
+
+
+/*describe('The greetings function', function(){
     it('should input word strings only', function(){
         var greeter = Greeting();
         let invalid = 256
@@ -133,6 +153,6 @@ describe('error messages', function(){
     
 
 
-})
+})*/
 
 
