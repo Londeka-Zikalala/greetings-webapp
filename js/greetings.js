@@ -19,7 +19,7 @@ export default function Greeting() {
       errorMessage = "Select a language and enter a valid string (No numbers or charecters)";
      
     }
-    else if(transformedName && language === undefined){
+    else if(transformedName  && language === undefined){
       errorMessage = "Please select a language";
 
     
@@ -27,6 +27,10 @@ export default function Greeting() {
     else if(!transformedName) {
       errorMessage = "Enter a valid string (No numbers or charecters)";
    
+    }
+
+    else{
+      errorMessage = ""
     }
     
   }
@@ -36,17 +40,14 @@ export default function Greeting() {
     
     const transformedName = inputString(name);
    
-      errorMessage = "";
-      if(name){
+     
+      if(transformedName){
         if (language === 'Swati') {
           message = 'Sawubona ' + transformedName;
         } else if (language === 'English') {
           message = 'Hello ' + transformedName;
         } else if (language === 'Sotho') {
           message = 'Dumela ' + transformedName;
-        }
-        else{
-          message = "";
         }
       }
      
@@ -85,7 +86,19 @@ export default function Greeting() {
 
     const transformedName = inputString(name)
     if(message){
-
+      if (!alreadyGreeted[transformedName]) {
+        alreadyGreeted[transformedName] = true;
+        greetedNames[transformedName] = 1;
+        if(!errorMessage){
+          greetingsCounter++;
+        }
+  
+        //return false;
+      } 
+        greetedNames[transformedName]++;
+  
+      return true;
+    }
      /*var greetedName = await db.oneOrNone(
         "select name from greetings_schema.users where name = $1",
         [transformedName]
@@ -97,17 +110,6 @@ export default function Greeting() {
 
       }*/
 
-      if (!alreadyGreeted[transformedName]) {
-        alreadyGreeted[transformedName] = true;
-        greetedNames[transformedName] = 1;
-        greetingsCounter++;
-  
-        return false;
-      } 
-        greetedNames[transformedName]++;
-  
-      return true;
-    }
   }
 
 
@@ -134,6 +136,7 @@ export default function Greeting() {
     
  /*var dbUsers = await db.oneOrNone("select count(name) from greetings_schema.users")
  greetingsCounter = dbUsers.count*/
+ 
  return greetingsCounter ;
   
   };

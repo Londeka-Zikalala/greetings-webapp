@@ -32,13 +32,16 @@ app.get('/', (req, res) => {
 });
 
 
-app.post('/greet', async (req, res) => {
+app.post('/greet', (req, res) => {
     const name = req.body.name;
     const language = req.body.chooseLanguage;
 
     const message = greeting.greetFunction(name, language);
-
+        let errorMessages = greeting.errorMessages(name, language)
+    if(!errorMessages){
         greeting.greetedFunction(name)
+    }
+        
 
     /*try{ 
             await db.none('UPDATE users SET timesgreeted = timesgreeted + 1 WHERE  name =$1', name)
@@ -48,7 +51,7 @@ app.post('/greet', async (req, res) => {
         console.error('Error updating user data:', error);
     };*/
 
-    greeting.errorMessages(name, language)
+    
     const  timesGreeted = greeting.getCounter();
     let errorMessage= greeting.getErrorMessage()
 
@@ -62,9 +65,10 @@ app.post('/greet', async (req, res) => {
        
 
     })
+    console.log(errorMessage, timesGreeted, message, name)
 });
 
-app.get('/counter/:name',async (req, res) => {
+app.get('/counter/:name', (req, res) => {
     const name = req.params.name;
 
    /* try{
@@ -92,7 +96,7 @@ app.get('/counter/:name',async (req, res) => {
 })
 
 
-app.get('/greeted', async (req, res) => {
+app.get('/greeted',(req, res) => {
 
        /* try{
             const greetedName = await db.any('SELECT name FROM greetings_schema.users');
