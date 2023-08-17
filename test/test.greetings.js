@@ -16,10 +16,10 @@ describe('The greetings function', function(){
         greeter.greetFunction('Lala', 'Sotho')
         greeter.greetFunction('Nate','English')
         greeter.greetFunction('Londeka','Swati')
-       await greeter.greetedFunction('Nsovo');
-       await greeter.greetedFunction('Lala');
-       await greeter.greetedFunction('Nate');
-       await greeter.greetedFunction('Londeka');
+       await greeter.greetedFunction('Nsovo', 'Swati');
+       await greeter.greetedFunction('Lala', 'Sotho');
+       await greeter.greetedFunction('Nate', 'English');
+       await greeter.greetedFunction('Londeka', 'Swati');
     
         assert.equal(await greeter.getCounter(), 4)
     })

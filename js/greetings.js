@@ -71,7 +71,7 @@ async function greetedFunction(name, language) {
     );
 
     if (greetedName === null) {
-      if (!language) {
+      if (language) {
         await db.none('INSERT INTO greetings_schema.users (name, language, timesgreeted) VALUES ($1, $2, $3)', [name, language, 1]);
       } else {
         console.error('Language is missing');

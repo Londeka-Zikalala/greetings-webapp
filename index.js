@@ -38,7 +38,7 @@ app.post('/greet', async (req, res) => {
 
     const message = greeting.greetFunction(name, language);
 
-        greeting.greetedFunction(name)
+        greeting.greetedFunction(name, language)
 
     try{ 
             await db.none('UPDATE users SET timesgreeted = timesgreeted + 1 WHERE  name =$1', name)
