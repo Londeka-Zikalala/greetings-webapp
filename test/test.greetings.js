@@ -48,7 +48,7 @@ describe('The greetings function', function(){
        await greeter.greetedFunction('Lala', 'Sotho');
        await greeter.greetedFunction('Londeka', 'English');
        await greeter.greetedFunction('Londeka', 'Swati');
-=      
+
         assert.equal(await greeter.getUserCount('Londeka'), 2)
     });
     
