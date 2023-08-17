@@ -2,10 +2,15 @@ import pgPromise from 'pg-promise';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const connectionString =  {
-    dbURL: process.env.DATABASE_URL,
-   ssl: { rejectUnauthorized: false }
-}
+
+const connectionString = {
+    host: process.env.HOSTNAME, 
+    port: process.env.PORT,    
+    database: process.env.DATABASE,
+    user: process.env.USERNAME,
+    password: process.env.PASSWORD,
+    ssl: { rejectUnauthorized: false }
+};
 
 const db = pgPromise()(connectionString);
 db.connect();
