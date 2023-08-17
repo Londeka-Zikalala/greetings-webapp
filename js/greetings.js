@@ -117,10 +117,15 @@ async function greetedFunction(name, language) {
 
 
 
-  function getUserCount(name) {
-   
+  async function getUserCount(name) {
     const transformedName = inputString(name)
-      return greetedNames[transformedName] || 0
+    const query =
+    "select timesgreeted from greetings_schema.users where name = $1";
+    const userData = await db.oneOrNone(query, greetedNames[transformedName]);
+
+    return userData
+    /*
+      return greetedNames[transformedName] || 0*/
   
    
   };
