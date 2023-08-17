@@ -134,10 +134,16 @@ async function greetedFunction(name, language) {
   
   };
 
-  function reset() {
-    greetingsCounter = 0;
+ async  function reset() {
+
+  await db.none(
+    "TRUNCATE TABLE greetings_schema.users RESTART IDENTITY CASCADE;"
+  );
+
+
+   /* greetingsCounter = 0;
     alreadyGreeted = {};
-    greetedNames = {};
+    greetedNames = {};*/
 
   };
 

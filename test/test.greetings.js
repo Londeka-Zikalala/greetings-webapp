@@ -3,7 +3,7 @@ import Greeting from "../js/greetings.js";
 import db from "../db.js";
 
 
-describe('The greetings function', function(){ 
+describe('The greetings function', function(){
   this.timeout(6000);
   beforeEach(async function () {
     await db.none(
@@ -22,9 +22,29 @@ describe('The greetings function', function(){
        await greeter.greetedFunction('Londeka', 'Swati');
     
         assert.equal(await greeter.getCounter(), 4)
-    })
+    });
+
+    it('should should reset the data', async function(){
+        var greeter = Greeting(db);
+        greeter.greetFunction('Nsovo', 'Swati')
+        greeter.greetFunction('Lala', 'Sotho')
+        greeter.greetFunction('Nate','English')
+        greeter.greetFunction('Londeka','Swati')
+       await greeter.greetedFunction('Nsovo', 'Swati');
+       await greeter.greetedFunction('Lala', 'Sotho');
+       await greeter.greetedFunction('Nate', 'English');
+       await greeter.greetedFunction('Londeka', 'Swati');
+       await greeter.reset()
+        assert.equal(await greeter.getCounter(), 0)
+    });
+
+    after(function () {
+        db.$pool.end();
+      });
     
 })
+
+
 
 
 /*describe('The greetings function', function(){
@@ -161,8 +181,6 @@ describe('error messages', function(){
 
 })*/
 
-after(function () {
-    db.$pool.end();
-  });
+
 
 
