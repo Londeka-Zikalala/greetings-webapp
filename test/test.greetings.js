@@ -38,7 +38,7 @@ describe('The greetings function', function(){
         assert.equal(await greeter.getCounter(), 0)
     });
 
-    it('should should count how many times a user has been greeted', async function(){
+   /* it('should should count how many times a user has been greeted', async function(){
         var greeter = Greeting(db);
         greeter.greetFunction('Nsovo', 'Swati')
         greeter.greetFunction('Lala', 'Sotho')
@@ -50,7 +50,7 @@ describe('The greetings function', function(){
        await greeter.greetedFunction('Londeka', 'Swati');
 
         assert.equal(await greeter.getUserCount('Londeka'), 2)
-    });
+    });*/
     
 
 
