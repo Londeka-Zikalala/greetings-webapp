@@ -121,7 +121,7 @@ async function greetedFunction(name, language) {
     const transformedName = inputString(name)
     const query =
     "select timesgreeted from greetings_schema.users where name = $1";
-    const userData = await db.oneOrNone(query, greetedNames[transformedName]);
+    const userData = await db.oneOrNone(query, [transformedName]);
 
     return userData
     /*
