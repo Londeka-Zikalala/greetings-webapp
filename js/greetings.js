@@ -60,8 +60,24 @@ export default function Greeting(db) {
   
 }
  
+async function greetedFunction(name, language) {
+  const transformedName = inputString(name);
 
-  async function greetedFunction(name) {
+  if (message) {
+    const greetedName = await db.oneOrNone(
+      "SELECT name FROM greetings_schema.users WHERE name = $1",
+      [transformedName]
+    );
+
+    if (greetedName === null) {
+
+      await db.none('INSERT INTO greetings_schema.users (name, language, timesgreeted) VALUES ($1, $2, $3)', [name, language, 1]);
+    } else {
+      await db.none('UPDATE greetings_schema.users SET timesgreeted = timesgreeted + 1 WHERE  name = $1', [name]);
+    }
+  }
+}
+ /* async function greetedFunction(name) {
 
     const transformedName = inputString(name)
     if(message){
@@ -77,7 +93,7 @@ export default function Greeting(db) {
 
       }
 
-      /*if (!alreadyGreeted[transformedName]) {
+      if (!alreadyGreeted[transformedName]) {
         alreadyGreeted[transformedName] = true;
         greetedNames[transformedName] = 1;
         greetingsCounter++;
@@ -86,9 +102,9 @@ export default function Greeting(db) {
       } 
         greetedNames[transformedName]++;
   
-      return true;*/
+      return true;
     }
-  }
+  }*/
 
 
   function getGreetedName() {
