@@ -1,4 +1,4 @@
-export default function Greeting(db) {
+export default function Greeting() {
   var alreadyGreeted = {};
   var greetedNames = {};
   var greetingsCounter = 0;
@@ -61,7 +61,7 @@ export default function Greeting(db) {
   
 }
  
-async function greetedFunction(name, language) {
+ /*function greetedFunction(name) {
   const transformedName = inputString(name);
 
   if (message) {
@@ -80,13 +80,13 @@ async function greetedFunction(name, language) {
       await db.none('UPDATE greetings_schema.users SET timesgreeted = timesgreeted + 1 WHERE  name = $1', [name]);
     }
   }
-}
- /* async function greetedFunction(name) {
+}*/
+  function greetedFunction(name) {
 
     const transformedName = inputString(name)
     if(message){
 
-     var greetedName = await db.oneOrNone(
+     /*var greetedName = await db.oneOrNone(
         "select name from greetings_schema.users where name = $1",
         [transformedName]
       )
@@ -95,7 +95,7 @@ async function greetedFunction(name, language) {
       } else{
         await db.none('UPDATE greetings_schema.users SET timesgreeted = timesgreeted + 1 WHERE  name = $1', [name]) 
 
-      }
+      }*/
 
       if (!alreadyGreeted[transformedName]) {
         alreadyGreeted[transformedName] = true;
@@ -108,7 +108,7 @@ async function greetedFunction(name, language) {
   
       return true;
     }
-  }*/
+  }
 
 
   function getGreetedName() {
@@ -117,38 +117,37 @@ async function greetedFunction(name, language) {
 
 
 
-  async function getUserCount(name) {
+  function getUserCount(name) {
     const transformedName = inputString(name)
-    const query =
+    /*const query =
     "select timesgreeted from greetings_schema.users where name = $1";
     const userData = await db.oneOrNone(query, [transformedName]);
 
     return userData
-    /*
-      return greetedNames[transformedName] || 0*/
+    */
+      return greetedNames[transformedName] || 0
   
    
   };
 
- async function getCounter() {
+  function getCounter() {
     
- var dbUsers = await db.oneOrNone("select count(name) from greetings_schema.users")
- greetingsCounter = dbUsers.count
-
-  return greetingsCounter ;
+ /*var dbUsers = await db.oneOrNone("select count(name) from greetings_schema.users")
+ greetingsCounter = dbUsers.count*/
+ return greetingsCounter ;
   
   };
 
- async  function reset() {
+  function reset() {
 
-  await db.none(
+  /*await db.none(
     "TRUNCATE TABLE greetings_schema.users RESTART IDENTITY CASCADE;"
   );
+*/
 
-
-   /* greetingsCounter = 0;
+   greetingsCounter = 0;
     alreadyGreeted = {};
-    greetedNames = {};*/
+    greetedNames = {};
 
   };
 

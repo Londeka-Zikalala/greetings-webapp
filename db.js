@@ -1,14 +1,15 @@
-import pgPromise from 'pg-promise';
+/*import pgPromise from 'pg-promise';
 import dotenv from 'dotenv';
 dotenv.config();
 
-
+const PORT = process.env.PORT || 3000;
 const connectionString = {
     host: process.env.HOSTNAME, 
     port: process.env.PORT,    
     database: process.env.DATABASE,
     user: process.env.USERNAME,
     password: process.env.PASSWORD,
+    database_url: process.env.PORT,
     ssl:true //{  
        // rejectUnauthorized: false, 
        // minVersion: 'TLSv1.2',    

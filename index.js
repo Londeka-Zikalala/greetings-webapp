@@ -1,7 +1,7 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
 import bodyParser from 'body-parser';
-import db from './db.js';
+//import db from './db.js';
 import Greeting from './js/greetings.js';
 
 
@@ -38,7 +38,7 @@ app.post('/greet', async (req, res) => {
 
     const message = greeting.greetFunction(name, language);
 
-        greeting.greetedFunction(name, language)
+        greeting.greetedFunction(name)
 
     /*try{ 
             await db.none('UPDATE users SET timesgreeted = timesgreeted + 1 WHERE  name =$1', name)
@@ -88,7 +88,7 @@ app.get('/counter/:name',async (req, res) => {
         name,
         timesGreeted
     });
-    
+    console.log(timesGreeted)
 })
 
 
