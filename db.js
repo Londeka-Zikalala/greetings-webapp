@@ -9,8 +9,12 @@ const connectionString = {
     database: process.env.DATABASE,
     user: process.env.USERNAME,
     password: process.env.PASSWORD,
-    ssl: { rejectUnauthorized: false }
-};
+    ssl:true //{  
+       // rejectUnauthorized: false, 
+       // minVersion: 'TLSv1.2',    
+       // ciphers: 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256', 
+   // },
+}
 
 const db = pgPromise()(connectionString);
 db.connect();
