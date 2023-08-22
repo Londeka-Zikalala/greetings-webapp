@@ -1,8 +1,7 @@
-/*import pgPromise from 'pg-promise';
+import pgPromise from 'pg-promise';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const PORT = process.env.PORT || 3000;
 const connectionString = {
     host: process.env.HOSTNAME, 
     port: process.env.PORT,    
@@ -10,11 +9,7 @@ const connectionString = {
     user: process.env.USERNAME,
     password: process.env.PASSWORD,
     database_url: process.env.PORT,
-    ssl:true //{  
-       // rejectUnauthorized: false, 
-       // minVersion: 'TLSv1.2',    
-       // ciphers: 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256', 
-   // },
+    ssl:true 
 }
 
 const db = pgPromise()(connectionString);

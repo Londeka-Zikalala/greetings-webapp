@@ -4,7 +4,7 @@ export default function Greeting() {
   var greetingsCounter = 0;
   let errorMessage = '';
   let message = '';
-  
+
 
   function inputString(name) {
     const regex = /^[a-zA-Z]+$/i;
@@ -12,103 +12,77 @@ export default function Greeting() {
 
   }
 
-  function errorMessages(name, language){
+  function errorMessages(name, language) {
     let transformedName = inputString(name);
-    
+
     if (transformedName === "" && language === undefined) {
       errorMessage = "Select a language and enter a valid string (No numbers or charecters)";
-     
+
     }
-    else if(transformedName  && language === undefined){
+    else if (transformedName && language === undefined) {
       errorMessage = "Please select a language";
 
-    
+
     }
-    else if(!transformedName) {
+    else if (!transformedName) {
       errorMessage = "Enter a valid string (No numbers or charecters)";
-   
+
     }
 
-    else{
+    else {
       errorMessage = ""
     }
-    
+
   }
 
 
-   function greetFunction(name, language) {
-    
+  function greetFunction(name, language) {
+
     const transformedName = inputString(name);
-   
-     
-      if(transformedName){
-        if (language === 'Swati') {
-          message = 'Sawubona ' + transformedName;
-        } else if (language === 'English') {
-          message = 'Hello ' + transformedName;
-        } else if (language === 'Sotho') {
-          message = 'Dumela ' + transformedName;
-        }
+
+
+    if (transformedName) {
+      if (language === 'Swati') {
+        message = 'Sawubona ' + transformedName;
+      } else if (language === 'English') {
+        message = 'Hello ' + transformedName;
+      } else if (language === 'Sotho') {
+        message = 'Dumela ' + transformedName;
       }
-     
-      
+    }
+
+
     return message
   };
-  
 
-  function getErrorMessage(){
-  
-      return errorMessage
-  
-}
- 
- /*function greetedFunction(name) {
-  const transformedName = inputString(name);
 
-  if (message) {
-    const greetedName = await db.oneOrNone(
-      "SELECT name FROM greetings_schema.users WHERE name = $1",
-      [transformedName]
-    );
+  function getErrorMessage() {
 
-    if (greetedName === null) {
-      if (language) {
-        await db.none('INSERT INTO greetings_schema.users (name, language, timesgreeted) VALUES ($1, $2, $3)', [name, language, 1]);
-      } else {
-        console.error('Language is missing');
-      }
-    } else {
-      await db.none('UPDATE greetings_schema.users SET timesgreeted = timesgreeted + 1 WHERE  name = $1', [name]);
-    }
+    return errorMessage
+
   }
-}*/
+
+
+
   function greetedFunction(name) {
 
     const transformedName = inputString(name)
-    if(message){
+    if (message) {
       if (!alreadyGreeted[transformedName]) {
         alreadyGreeted[transformedName] = true;
         greetedNames[transformedName] = 1;
-        if(!errorMessage){
+        if (!errorMessage) {
           greetingsCounter++;
         }
-  
-        //return false;
-      } 
-        greetedNames[transformedName]++;
-  
+
+        return false;
+      }
+      greetedNames[transformedName]++;
+
       return true;
     }
-     /*var greetedName = await db.oneOrNone(
-        "select name from greetings_schema.users where name = $1",
-        [transformedName]
-      )
-      if(greetedName === null){
-        await db.none('INSERT INTO greetings_schema.users (name, timesgreeted) VALUES ($1, $2)', [name, 1]);
-      } else{
-        await db.none('UPDATE greetings_schema.users SET timesgreeted = timesgreeted + 1 WHERE  name = $1', [name]) 
 
-      }*/
+
 
   }
 
@@ -121,34 +95,22 @@ export default function Greeting() {
 
   function getUserCount(name) {
     const transformedName = inputString(name)
-    /*const query =
-    "select timesgreeted from greetings_schema.users where name = $1";
-    const userData = await db.oneOrNone(query, [transformedName]);
 
-    return userData
-    */
-      return greetedNames[transformedName] || 0
-  
-   
+    return greetedNames[transformedName] || 0
+
+
   };
 
   function getCounter() {
-    
- /*var dbUsers = await db.oneOrNone("select count(name) from greetings_schema.users")
- greetingsCounter = dbUsers.count*/
- 
- return greetingsCounter ;
-  
+
+
+    return greetingsCounter;
+
   };
 
   function reset() {
 
-  /*await db.none(
-    "TRUNCATE TABLE greetings_schema.users RESTART IDENTITY CASCADE;"
-  );
-*/
-
-   greetingsCounter = 0;
+    greetingsCounter = 0;
     alreadyGreeted = {};
     greetedNames = {};
 

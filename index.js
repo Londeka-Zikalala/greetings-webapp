@@ -1,7 +1,7 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
 import bodyParser from 'body-parser';
-//import db from './db.js';
+import db from './db.js';
 import Greeting from './js/greetings.js';
 
 
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.post('/greet', (req, res) => {
+app.post('/greet',async (req, res) => {
     const name = req.body.name;
     const language = req.body.chooseLanguage;
 
@@ -43,13 +43,13 @@ app.post('/greet', (req, res) => {
     }
         
 
-    /*try{ 
+    try{ 
             await db.none('UPDATE users SET timesgreeted = timesgreeted + 1 WHERE  name =$1', name)
 
 
     } catch (error){
         console.error('Error updating user data:', error);
-    };*/
+    };
 
     
     const  timesGreeted = greeting.getCounter();
@@ -68,10 +68,10 @@ app.post('/greet', (req, res) => {
     console.log(errorMessage, timesGreeted, message, name)
 });
 
-app.get('/counter/:name', (req, res) => {
+app.get('/counter/:name', async(req, res) => {
     const name = req.params.name;
 
-   /* try{
+    try{
         const userData = await db.oneOrNone('SELECT  timesgreeted FROM greetings_schema.users WHERE name = $1', name);
         const timesGreeted = userData ? userData.timesGreeted:0;
         res.render('counter',{
@@ -86,19 +86,19 @@ app.get('/counter/:name', (req, res) => {
             timesGreeted:0
         });
     };
-    */
-    const timesGreeted = greeting.getUserCount(name);
+    
+    /*const timesGreeted = greeting.getUserCount(name);
     res.render('counter', {
         name,
         timesGreeted
     });
-    console.log(timesGreeted)
+    console.log(timesGreeted)*/
 })
 
 
-app.get('/greeted',(req, res) => {
+app.get('/greeted',async(req, res) => {
 
-       /* try{
+       try{
             const greetedName = await db.any('SELECT name FROM greetings_schema.users');
             res.render('greeted',{
                 greeted: greetedName
@@ -108,13 +108,13 @@ app.get('/greeted',(req, res) => {
             res.render('greeted',{
                 greeted:''
             });
-        };*/
+        };
 
-    const greeted = greeting.getGreetedName();
+    /*const greeted = greeting.getGreetedName();
 
     res.render('greeted', {
         greeted
-    })
+    })*/
 });
 
 app.post('/reset', (req, res) => {
