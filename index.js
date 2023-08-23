@@ -68,13 +68,12 @@ app.get('/counter/:name', async(req, res) => {
             timesGreeted
         });
 
-
     });
 
 
 
     app.get('/greeted', async (req, res) => {
-        const greeted = greeting.getGreetedName();
+        const greeted = await query.getUserNames();
         console.log("Greeted Names:", greeted);
         res.render('greeted', {
             greeted
