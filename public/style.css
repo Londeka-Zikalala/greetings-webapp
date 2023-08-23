@@ -3,17 +3,19 @@ body {
   height: 100%;
   width: 100%;
   font-size: 100%;
-  overflow: hidden; 
+  padding:2em;
+  overflow: hidden;
 }
 
 .container {
-  width: 35em;
-  height: 85vh;
+  width: 90%;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: floralwhite;
+  background-color: rgb(250, 228, 188);
+
 }
 
 /*.row {
@@ -26,21 +28,29 @@ body {
 }
 */
 .col-2 {
-  width: 25em;
-  padding: 1%;
+  width:max-content;
+  padding:15% ;
+  margin: 2%;
+  background-color: rgb(250, 228, 188);
+
+
 }
 
 a {
   text-decoration: none;
-  color: burlywood;
+  color: cadetblue;
+  font-weight: 500;
 }
-
+label{
+  font-weight: 900;
+  color: cadetblue;
+}
 .button-primary,
 input[type="text"].button-primary,
 input[type="button"].button-primary {
   color: #fff;
-  background-color: orangered;
-  border-color: orange;
+  background-color:cadetblue;
+  border-color: navajowhite;
   border-radius: 1em;
 }
 
@@ -50,13 +60,22 @@ input[type="button"].button-primary {
   flex-direction: row;
   
 }
+.nav{
+  float: right;
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
 .red {
   color: red;
 }
 
 .message {
-  color: darkslategrey;
+  color: orchid;
+  font-size:larger;
+  font-weight: 800;
 }
 
 .languages {
@@ -66,20 +85,21 @@ input[type="button"].button-primary {
 
 .alert {
   display: none;
-  color: green;
+  color: violet;
   margin-top: 10px; 
 }
-
+.header{
+  font-weight: 800;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 /* Small screens */
 @media only screen and (max-width: 34em) {
   .container {
     width: 85%;
     height: 40%;
-    margin-inline: 15%;
-    margin-block: 5%;
   }
 
-  .col-2,.row {
+  .col-2 {
     max-width: 90%;
   }
 }
@@ -88,8 +108,7 @@ input[type="button"].button-primary {
 @media only screen and (min-width: 35em) {
   .container {
     max-width: 80%;
-    margin-inline: 35%;
-    margin-block: 5%;
+  
   }
 
   .col-2 {
@@ -101,8 +120,7 @@ input[type="button"].button-primary {
 @media only screen and (min-width: 55em) {
   .container {
     max-width: 85%;
-    margin-inline: 35%;
-    margin-block: 5%;
+   
   }
 
   .col-2 {

@@ -6,17 +6,21 @@
     <title>Counter</title>
 </head>
 <body>
-    <h1>Greeted users</h1>
+    <h1 class="header">Greeted users</h1>
     <h3>Click on a user name to see counter</h3>
-    <table>
-        <tr>
-            <th>USERNAMES:</th>
-        </tr>
+   
+        <ul>
+            <h4>USERNAMES:</h4>
+       <li>
         {{#each greeted}}
-        <tr>
+        
             <td><a href="/counter/{{{@key}}}">{{@key}}</a></td>
-        </tr>
+      </li>
         {{/each}}
-    </table>
+    <ul>
+        <div class="nav">
+            <a href="/greet">Home</a>
+        </div>
+      
 </body>
 </html>

@@ -2,12 +2,13 @@ import express from 'express';
 import { engine } from 'express-handlebars';
 import bodyParser from 'body-parser';
 import db from './db.js';
+import dbQueries from './dbQueries.js';
 import Greeting from './js/greetings.js';
 
 
 const app = express();
-
 const greeting = Greeting();
+const query = dbQueries(db)
 
 
 //body-parser middleware
@@ -32,30 +33,21 @@ app.get('/', (req, res) => {
 });
 
 
-app.post('/greet',async (req, res) => {
+app.post('/greet', async (req, res) => {
     const name = req.body.name;
     const language = req.body.chooseLanguage;
 
     const message = greeting.greetFunction(name, language);
         let errorMessages = greeting.errorMessages(name, language)
     if(!errorMessages){
-        greeting.greetedFunction(name)
+         greeting.greetedFunction(name)
+       
     }
-        
-
-    try{ 
-            await db.none('UPDATE users SET timesgreeted = timesgreeted + 1 WHERE  name =$1', name)
-
-
-    } catch (error){
-        console.error('Error updating user data:', error);
-    };
-
     
     const  timesGreeted = greeting.getCounter();
-    let errorMessage= greeting.getErrorMessage()
+    let errorMessage= greeting.getErrorMessage();
 
-    
+        await query.updateUsers(name,language);
     
     res.render('index', {
         name: '',
@@ -65,57 +57,30 @@ app.post('/greet',async (req, res) => {
        
 
     })
-    console.log(errorMessage, timesGreeted, message, name)
+    console.log(errorMessage, timesGreeted, message)
 });
 
 app.get('/counter/:name', async(req, res) => {
     const name = req.params.name;
-
-    try{
-        const userData = await db.oneOrNone('SELECT  timesgreeted FROM greetings_schema.users WHERE name = $1', name);
-        const timesGreeted = userData ? userData.timesGreeted:0;
+    const timesGreeted= await query.getUserCount(name)
         res.render('counter',{
             name,
             timesGreeted
         });
 
-    } catch (error){
-        console.error('Error fetching user data:', error);
-        res.render('counter',{
-            name,
-            timesGreeted:0
-        });
-    };
-    
-    /*const timesGreeted = greeting.getUserCount(name);
-    res.render('counter', {
-        name,
-        timesGreeted
+
     });
-    console.log(timesGreeted)*/
-})
 
 
-app.get('/greeted',async(req, res) => {
 
-       try{
-            const greetedName = await db.any('SELECT name FROM greetings_schema.users');
-            res.render('greeted',{
-                greeted: greetedName
-            })
-        }   catch (error){
-            console.error('Error fetching greeted name:', error);
-            res.render('greeted',{
-                greeted:''
-            });
-        };
-
-    /*const greeted = greeting.getGreetedName();
-
-    res.render('greeted', {
-        greeted
-    })*/
-});
+    app.get('/greeted', async (req, res) => {
+        const greeted = greeting.getGreetedName();
+        console.log("Greeted Names:", greeted);
+        res.render('greeted', {
+            greeted
+        });
+    });
+    
 
 app.post('/reset', (req, res) => {
     greeting.reset()

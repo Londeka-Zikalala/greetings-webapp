@@ -10,22 +10,28 @@
 
 <body>
   <div class="container">
-    <div class="row">
-      <div class="col-2 heading">
+    <div class="col-2">
+      <div class=" header">
         <h1>Greetings</h1>
       </div>
-      <div class=" col-2 errorMessage red {{errorClass}}">
+      <div class="messages">
+        <div class="Greetmessage">
+        <h4 class="message"><span>{{message}}</span></h4>
+      </div>
+       <div class=" errorMessage red {{errorClass}}">
     <h4 id="errorMessage">{{errorMessage}}</h4>
       </div>
+      </div>
+     
       <form action="/greet" method="POST">
-      <div class="col-2 input-greet">
-        <label for="name">Enter Name</label>
+      <div class=" input-greet">
+        <label for="name">Enter Name:</label>
         <input type="text" name="name" value="{{name}}" placeholder="eg: Londeka" class="input-box">
         <div class="counter">
           <p>Click to see users <a href="/greeted">Greetings </a><span class="counter">{{timesGreeted}}</span></p>
         </div>
       </div>
-      <div class="col-2 languages">
+      <div class="languages">
         <label class="Swati">
           <input type="radio" name="chooseLanguage" class="chooseLanguageRadio" value="Swati">
           <span class="label-body">Swati</span>
@@ -39,24 +45,24 @@
           <span class="label-body">Sotho</span>
         </label>
       </div>
-      <div class=" col-2 Greetmessage">
-       
-        <h4 class="message"><span>{{message}}</span></h4>
-      </div>
-      <div class=" col-2 alert">
+      
+      <div class="alert">
         <h4 class="alert"><span></span></h4>
       </div>
-      <div class=" col-2 buttons">
+      <div class="buttons">
         <button class="button-primary greetBtn" type="submit" name="submit">Greet</button>
         </form>
         <form action="/reset" method="POST">
           <button class="button-primary resetButton" type="submit" name="reset">Reset</button>
+
         </form>
     </div>
       </div>
-    </div>
-  </div>
+      <div class="nav">
+            <a href="/greeted">Users</a>
 
+      </div>
+  </div>
   <script>
 
     let errorMessageElem = document.getElementById('errorMessage');
