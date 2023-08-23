@@ -62,7 +62,7 @@ app.post('/greet', async (req, res) => {
 
 app.get('/counter/:name', async(req, res) => {
     const name = req.params.name;
-    const timesGreeted= await query.getUserCount(name)
+    const timesGreeted= await query.getUsersCount(name);
         res.render('counter',{
             name,
             timesGreeted

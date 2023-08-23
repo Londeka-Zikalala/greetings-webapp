@@ -9,17 +9,17 @@
     <h1 class="header">Greeted users</h1>
     <h3>Click on a user name to see counter</h3>
    
-        <ul>
-            <h4>USERNAMES:</h4>
-       <li>
+        <table>
+            <th>USERNAMES:</th>
+       <tr>
         {{#each greeted}}
         
             <td><a href="/counter/{{{@key}}}">{{@key}}</a></td>
-      </li>
+      </tr>
         {{/each}}
-    <ul>
+    <table>
         <div class="nav">
-            <a href="/greet">Home</a>
+            <a href="/index.handlebars">Home</a>
         </div>
       
 </body>

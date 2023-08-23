@@ -10,7 +10,7 @@
 
 <body>
   <div class="container">
-    <div class="col-2">
+   
       <div class=" header">
         <h1>Greetings</h1>
       </div>
@@ -25,10 +25,11 @@
      
       <form action="/greet" method="POST">
       <div class=" input-greet">
-        <label for="name">Enter Name:</label>
-        <input type="text" name="name" value="{{name}}" placeholder="eg: Londeka" class="input-box">
+        <label for="name">Enter Name:
+           <input type="text" name="name" value="{{name}}" placeholder="eg: Londeka" class="input-box">
+        </label>
         <div class="counter">
-          <p>Click to see users <a href="/greeted">Greetings </a><span class="counter">{{timesGreeted}}</span></p>
+          <p>   Greetings : <span class="counter">{{timesGreeted}}</span></p>
         </div>
       </div>
       <div class="languages">
@@ -57,7 +58,6 @@
 
         </form>
     </div>
-      </div>
       <div class="nav">
             <a href="/greeted">Users</a>
 

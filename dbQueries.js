@@ -20,8 +20,8 @@ function dbQueries(){
     
     async function getUsersCount(name){
         try {
-            const userDataArray = await db.any('SELECT timesgreeted FROM greetings_schema.users WHERE name = $1', [name]);
-            const totalTimesGreeted = userDataArray.reduce((total, userData) => total + userData.timesgreeted, 0);
+            const userData= await db.any('SELECT timesgreeted FROM greetings_schema.users WHERE name = $1', [name]);
+            const totalTimesGreeted = userData.reduce((total, userData) => total + userData.timesgreeted, 0);
             return totalTimesGreeted;
         } catch (error) {
             console.error('Error getting user data', error);
