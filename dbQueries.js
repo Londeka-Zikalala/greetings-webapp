@@ -4,14 +4,12 @@ import db from './db.js'
 function dbQueries(){
     async function updateUsers(name, language) {
         try {
-            const existingUser = await db.oneOrNone('SELECT * FROM greetings_schema.users WHERE name = $1',[name]);
+            const existingUser = await db.any('SELECT * FROM greetings_schema.users WHERE name = $1',[name]);
     
             if (existingUser) {
-                await db.none(
-                    'UPDATE greetings_schema.users SET timesgreeted = timesgreeted + 1 WHERE name = $1',[name]);
+                await db.none('UPDATE greetings_schema.users SET timesgreeted = timesgreeted + 1 WHERE name = $1',[name]);
             } else {
-                await db.none(
-                    'INSERT INTO greetings_schema.users (name, language, timesgreeted) VALUES ($1, $2, $3)',[name, language, 1]);
+                await db.none('INSERT INTO greetings_schema.users (name, language, timesgreeted) VALUES ($1, $2, $3)',[name, language, 1]);
             }
         } catch (error) {
             console.error('Error inserting or updating user data', error);
