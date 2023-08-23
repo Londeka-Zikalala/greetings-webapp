@@ -2,13 +2,11 @@ import express from 'express';
 import { engine } from 'express-handlebars';
 import bodyParser from 'body-parser';
 import db from './db.js';
-import dbQueries from './dbQueries.js';
 import Greeting from './js/greetings.js';
 
 
 const app = express();
-const greeting = Greeting();
-const query = dbQueries(db)
+const greeting = Greeting(db);
 
 
 //body-parser middleware
@@ -40,14 +38,13 @@ app.post('/greet', async (req, res) => {
     const message = greeting.greetFunction(name, language);
         let errorMessages = greeting.errorMessages(name, language)
     if(!errorMessages){
-         greeting.greetedFunction(name)
+         await greeting.greetedFunction(name,language)
        
     }
     
     const  timesGreeted = greeting.getCounter();
     let errorMessage= greeting.getErrorMessage();
 
-        await query.updateUsers(name,language);
     
     res.render('index', {
         name: '',
@@ -57,12 +54,11 @@ app.post('/greet', async (req, res) => {
        
 
     })
-    console.log(errorMessage, timesGreeted, message)
 });
 
 app.get('/counter/:name', async(req, res) => {
     const name = req.params.name;
-    const timesGreeted= await query.getUsersCount(name);
+    const timesGreeted= await greeting.getUserCount(name)
         res.render('counter',{
             name,
             timesGreeted
@@ -73,16 +69,15 @@ app.get('/counter/:name', async(req, res) => {
 
 
     app.get('/greeted', async (req, res) => {
-        const greeted = await query.getUserNames();
-        console.log("Greeted Names:", greeted);
+        const greeted = await greeting.getGreetedName();
         res.render('greeted', {
             greeted
         });
     });
     
 
-app.post('/reset', (req, res) => {
-    greeting.reset()
+app.post('/reset', async (req, res) => {
+   await greeting.reset()
 
     res.render('index')
 })

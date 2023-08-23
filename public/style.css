@@ -54,7 +54,6 @@ button{
   overflow: auto;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
 
 .red {
@@ -87,7 +86,7 @@ label{
 .header{
   font-weight: 800;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  width: 50%;
+  width: 90%;
   font-size: xx-large;
   margin-right: 40%;
 }

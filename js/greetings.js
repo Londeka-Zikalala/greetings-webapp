@@ -1,3 +1,4 @@
+
 export default function Greeting(db) {
   var alreadyGreeted = {};
   var greetedNames = {};
@@ -63,42 +64,54 @@ export default function Greeting(db) {
 }
  
 
-   function greetedFunction(name) {
+async function greetedFunction(name, language) {
+  const transformedName = inputString(name);
 
-    const transformedName = inputString(name)
-    if(message){
-      if (!alreadyGreeted[transformedName]) {
-        alreadyGreeted[transformedName] = true;
-        greetedNames[transformedName] = 1;
-        if(!errorMessage){
-          greetingsCounter++;
-        }
-  
-      return false;
-      } else{
-        greetedNames[transformedName]++;
-  
+  if (transformedName) {
+    try {
+      const user = await db.oneOrNone('SELECT * FROM greetings_schema.users WHERE name = $1', [transformedName]);
+
+      if (!user) {
+        await db.none('INSERT INTO greetings_schema.users (name, timesgreeted, language) VALUES ($1, $2, $3)', [transformedName, 1, language]);
+        greetingsCounter++;
+        return false;
+      } else {
+        await db.none('UPDATE greetings_schema.users SET timesgreeted = timesgreeted + 1 WHERE name = $1', [transformedName]);
         return true;
       }
-       
-    }
+    } catch (error) {
+      console.error('Error interacting with database', error);
       return false;
-
+    }
   }
 
-
-  function getGreetedName() {
-    return greetedNames;
-  };
+  return false;
+}
 
 
+async function getGreetedName() {
+  try {
+    const greetedNames = await db.any('SELECT name FROM greetings_schema.users');
+    return greetedNames.map(data => data.name);
+  } catch (error) {
+    console.error('Error getting greeted names', error);
+    return [];
+  }
+}
 
-   function getUserCount(name) {
-    const transformedName = inputString(name)
- return greetedNames[transformedName] || 0
+
+
+async function getUserCount(name) {
+  const transformedName = inputString(name);
   
-   
-  };
+  try {
+    const user = await db.oneOrNone('SELECT * FROM greetings_schema.users WHERE name = $1', [transformedName]);
+    return user ? user.timesgreeted : 0;
+  } catch (error) {
+    console.error('Error fetching user count', error);
+    return 0;
+  }
+}
 
   function getCounter() {
  
@@ -107,17 +120,15 @@ return greetingsCounter ;
   };
 
   async function reset() {
-
-  await db.none(
-    "TRUNCATE TABLE greetings_schema.users RESTART IDENTITY CASCADE;"
-  );
-
-
-   /*greetingsCounter = 0;
-    alreadyGreeted = {};
-    greetedNames = {};*/
-
-  };
+    try {
+      await db.none("TRUNCATE TABLE greetings_schema.users RESTART IDENTITY CASCADE;");
+      greetingsCounter = 0;
+      errorMessage = '';
+      message = '';
+    } catch (error) {
+      console.error('Error resetting data', error);
+    }
+  }
 
   return {
     inputString,
