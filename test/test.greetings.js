@@ -57,7 +57,7 @@ describe('The users Table', async function(){
         
     let name = 'Londeka';
     let language = 'Sotho';
-try{
+
     let result = await user.greetedFunction(name, language);
     let userCount = await user.getUserCount(name);
     let counter = user.getCounter();
@@ -65,22 +65,17 @@ try{
     assert.isTrue(result);
     assert.equal(userCount, 1);
     assert.equal(counter, 1);
-        
-} catch(error){
-    throw error
-}
+ 
 
     })
 
     it('should keep count of existing user greetings', async function(){
         let name = 'Londeka';
         let language = 'Sotho';
-       try{
+     
         await user.greetedFunction(name,language);
         assert.equal(await user.getUserCount(name), 1)
-       } catch(error){
-        throw error
-       }
+       
     })
 
 
@@ -88,14 +83,12 @@ try{
         let name1 = 'Londeka';
         let name2 = 'Kelly'
         let language = 'Sotho';
-        try{
+        
             await user.greetedFunction(name1,language);
         await user.greetedFunction(name2,language);
 
         assert.deepEqual(await user.getGreetedName(), ['londeka', 'kelly'])
-        }catch(error){
-            throw error
-        }
+       
         
     })
 
@@ -103,16 +96,14 @@ try{
            let name1 = 'Londeka';
         let name2 = 'Kelly'
         let language = 'Sotho';
-        try{
+       
             await user.greetedFunction(name1,language);
         await user.greetedFunction(name2,language);
        let userCount = await user.getUserCount(name);
         await user.reset()
         assert.equal(userCount, 0);
         
-        }catch(error){
-            throw error
-        }
+       
         
        
     })
