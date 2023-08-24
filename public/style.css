@@ -13,11 +13,18 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   background-color: rgb(250, 228, 188);
 
 }
-
+.container2{
+  width: 75%;
+  height: 70vh;
+  margin-inline: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(250, 228, 188)
+}
 a {
   text-decoration: none;
   color: violet;
@@ -25,11 +32,16 @@ a {
   font-size: large;
 }
 .input-greet{
-  display:flex;
+  display:inline-flex;
   justify-content: space-between;
   align-items:center;
+  margin-left: 15%;
 }
-
+p{
+  font-weight: 900;
+  font-size: x-large;
+  color: purple;
+}
 .button-primary,
 input[type="submit"].button-primary,
 input[type="submit"].button-primary {
@@ -37,24 +49,37 @@ input[type="submit"].button-primary {
   border-color: navajowhite;
   background-color:purple;
   border-radius: 1em;
-
 }
 
-
-
 .buttons {
-  margin-left: 15%;
+  margin-left:40% ;
   display: flex;
   flex-direction: row;
-  
+  width: 50%;
 }
 .nav{
   float: right;
   overflow: auto;
   display: inline-flex;
+  margin-left: 80%;
+  margin-top: 15%;
 }
-.home{
-  padding:1px ;
+.home, .users{
+  padding:1%;
+  margin:2%
+}
+.nav2{
+  display: flex;
+  float: right;
+  margin-left: 70%;
+}
+.header2{
+  color: purple;
+  font-weight: 800;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  width: 100%;
+  font-size: xx-large;
+  margin-left: 70%;
 }
 .red {
   color: red;
@@ -71,12 +96,15 @@ input[type="submit"].button-primary {
   font-weight: 900;
   color: cadetblue;
   width: 60%;
-  margin-inline: 5%;
+  margin-inline:30%;
+  margin-bottom: 5%;
+  margin-top: 5%;
 }
 label{
   color: orchid;
   font-weight: 700;
-  font-size: large;
+  font-size: larger;
+  width: 100%;
 }
 .alert {
   display: none;
@@ -89,46 +117,41 @@ label{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   width: 100%;
   font-size: xx-large;
-  margin-right: 40%;
-
+  margin-left: 60%;
 }
-h3,h4,h5,h6,th{
+
+h2{
+  color: orchid;
+  font-weight:800;
+  margin-block: 10%;
+}
+h3,h5,h6,th{
   color: orchid;
   font-weight:800;
   font-size: large;
 }
 /* Small screens */
 @media only screen and (max-width: 34em) {
-  .container {
+  .container,.container2 {
     width: 85%;
-    height: 40%;
+    height: 50vh;
   }
 
-  .col-2 {
-    max-width: 90%;
-  }
 }
 
 /* Medium screens */
 @media only screen and (min-width: 35em) {
-  .container {
+  .container,.container2 {
     max-width: 80%;
   
   }
 
-  .col-2 {
-    max-width: 90%;
-  }
 }
 
 /* Large screens */
 @media only screen and (min-width: 55em) {
-  .container {
+  .container,.container2 {
     max-width: 85%;
    
-  }
-
-  .col-2 {
-    max-width: 100%;
   }
 }

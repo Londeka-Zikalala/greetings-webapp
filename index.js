@@ -79,7 +79,14 @@ app.get('/counter/:name', async(req, res) => {
     
 
 app.post('/reset', async (req, res) => {
-   await user.reset()
+  
+    try {
+        await user.reset();
+        res.status(200).send('Reset successful');
+      } catch (error) {
+        console.error('Error resetting data', error);
+        res.status(500).send('Error resetting data');
+      }
 
     res.render('index')
 })

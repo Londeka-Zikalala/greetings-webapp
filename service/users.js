@@ -62,15 +62,15 @@ function usersTable(db){
       };
 
         async function reset() {
+      
             try {
               await db.none("TRUNCATE TABLE greetings_schema.users RESTART IDENTITY CASCADE;");
               greetingsCounter = 0;
-              errorMessage = '';
-              message = '';
             } catch (error) {
               console.error('Error resetting data', error);
             }
-          }
+          
+        };
       
 
       return{
