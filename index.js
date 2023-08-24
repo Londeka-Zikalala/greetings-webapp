@@ -88,7 +88,6 @@ app.post('/reset', async (req, res) => {
         res.status(500).send('Error resetting data');
       }
 
-    res.render('index')
 })
 
 const PORT = process.env.PORT || 3000;

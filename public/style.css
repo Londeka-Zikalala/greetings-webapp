@@ -62,8 +62,7 @@ input[type="submit"].button-primary {
   float: right;
   overflow: auto;
   display: inline-flex;
-  margin-left: 80%;
-  margin-top: 15%;
+  margin-left: 70%;
 }
 .home, .users{
   padding:1%;
@@ -124,7 +123,7 @@ label{
 h2{
   color: orchid;
   font-weight:800;
-  margin-block: 10%;
+  margin-block:5%;
 }
 h3,h5,h6,th{
   color: orchid;
