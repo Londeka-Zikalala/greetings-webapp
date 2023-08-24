@@ -1,6 +1,5 @@
-import db from "../db.js";
 
-function usersTable(){
+function usersTable(db){
     var greetingsCounter = 0;
     function inputString(name) {
         const regex = /^[a-zA-Z]+$/i;

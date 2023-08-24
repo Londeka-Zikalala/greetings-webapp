@@ -1,7 +1,11 @@
 import assert from "assert";
 import Greeting from "../js/greetings.js";
-import usersTable from "../service/users.js";
-import db from "../db.js";
+import usersTable from "../service/users.js"
+import pgPromise from "pg-promise";
+const pgp = pgPromise();
+const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/my_products_test';
+
+const db = pgp(connectionString);
 
 describe('The greetings function', function(){
   const greeter = Greeting();
@@ -47,7 +51,7 @@ describe('The greetings function', function(){
 
    
 describe('The users Table', async function(){
-    let user = usersTable();
+    let user = usersTable(db);
     beforeEach(async function(){
         await db.none("delete from users")
         await user.reset();
