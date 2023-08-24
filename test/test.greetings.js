@@ -47,7 +47,7 @@ describe('The greetings function', function(){
 
    
 describe('The users Table', async function(){
-    let user = usersTable(db);
+    let user = usersTable();
     beforeEach(async function(){
         await db.none("delete from users")
         await user.reset();
