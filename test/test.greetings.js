@@ -1,11 +1,6 @@
 import assert from "assert";
 import Greeting from "../js/greetings.js";
 import usersTable from "../service/users.js"
-import pgPromise from "pg-promise";
-const pgp = pgPromise();
-const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/my_products_test';
-
-const db = pgp(connectionString);
 
 describe('The greetings function', function(){
   const greeter = Greeting();
