@@ -1,15 +1,18 @@
 import assert from "assert";
 import Greeting from "../js/greetings.js";
-
+import usersTable from "../service/users.js";
+import db from "../db.js";
 
 describe('The greetings function', function(){
+  const greeter = Greeting();
+
     it('should input word strings only', function(){
-        var greeter = Greeting();
+       
         let invalid = 256
         assert.equal(greeter.inputString(invalid), false)
     })
     it('should recognise "john" and "John" as the same name', function(){
-        var greeter = Greeting();
+ 
         var name = 'John'
         var name2 = 'john'
         assert.equal(greeter.inputString(name), 'john')
@@ -17,14 +20,14 @@ describe('The greetings function', function(){
 
     })
     it('should greet any name in Swati', function(){
-        var greeter = Greeting();
+       
         assert.equal(greeter.greetFunction('Londeka', 'Swati'), 'Sawubona londeka' )
         assert.equal(greeter.greetFunction('Nate', 'Swati'),'Sawubona nate' )
         assert.equal(greeter.greetFunction('Nsovo', 'Swati'),  'Sawubona nsovo')
     });
 
     it('should greet any name in Sotho', function(){
-        var greeter = Greeting();
+  
         assert.equal(greeter.greetFunction('Londeka', 'Sotho'),'Dumela londeka')
             assert.equal(greeter.greetFunction('Nate', 'Sotho'), 'Dumela nate' )
             assert.equal(greeter.greetFunction('Nsovo', 'Sotho'), 'Dumela nsovo' )
@@ -33,7 +36,7 @@ describe('The greetings function', function(){
     })
 
     it('should greet any name in English',function(){
-        var greeter = Greeting();
+        
 
         assert.equal(greeter.greetFunction('Londeka', 'English'),'Hello londeka')
             assert.equal(greeter.greetFunction('Nate', 'English'),'Hello nate')
@@ -43,75 +46,82 @@ describe('The greetings function', function(){
     })
 
    
-describe('greeting counters',function(){
-    it('should not increment the counter if a name has already been greeted', function(){
-        var greeter = Greeting();
+describe('The users Table', async function(){
+    let user = usersTable(db);
+    beforeEach(async function(){
+        await db.none("delete from users")
+        await user.reset();
+    })
+    done();
+
+    it('should add a new user and increment the greet count',async function(){
         
-        greeter.greetFunction('Londeka', 'Swati')
-        greeter.greetFunction('Londeka', 'Swati')
-        greeter.greetedFunction('Londeka')
+    let name = 'Londeka';
+    let language = 'Sotho';
+try{
+    let result = await user.greetedFunction(name, language);
+    let userCount = await user.getUserCount(name);
+    let counter = user.getCounter();
 
-        assert.equal(greeter.getCounter(), 1)
+    assert.isTrue(result);
+    assert.equal(userCount, 1);
+    assert.equal(counter, 1);
+        
+} catch(error){
+    throw error
+}
 
     })
 
-
-    it('should keep a count of Swati greetings', function(){
-        var greeter = Greeting();
-        greeter.greetFunction('Nsovo', 'Swati')
-        greeter.greetFunction('Lala', 'Swati')
-        greeter.greetFunction('Nate','Swati')
-        greeter.greetFunction('Londeka','Swati')
-            greeter.greetedFunction('Nsovo');
-            greeter.greetedFunction('Lala');
-            greeter.greetedFunction('Nate');
-            greeter.greetedFunction('Londeka');
-
-        assert.equal(greeter.getCounter(), 4)
+    it('should keep count of existing user greetings', async function(){
+        let name = 'Londeka';
+        let language = 'Sotho';
+       try{
+        await user.greetedFunction(name,language);
+        assert.equal(await user.getUserCount(name), 1)
+       } catch(error){
+        throw error
+       }
     })
-    it('should keep a count of Sotho greetings', function(){
-        var greeter = Greeting();
-        greeter.greetFunction('Nsovo', 'English')
-        greeter.greetFunction('Lala', 'English')
-        greeter.greetFunction('Nate','English')
-        greeter.greetFunction('Londeka','English')
-            greeter.greetedFunction('Nsovo');
-            greeter.greetedFunction('Lala');
-            greeter.greetedFunction('Nate');
-            greeter.greetedFunction('Londeka');
 
-        assert.equal(greeter.getCounter(), 4)
+
+    it('should get a list of greeted names', async function(){
+        let name1 = 'Londeka';
+        let name2 = 'Kelly'
+        let language = 'Sotho';
+        try{
+            await user.greetedFunction(name1,language);
+        await user.greetedFunction(name2,language);
+
+        assert.deepEqual(await user.getGreetedName(), ['londeka', 'kelly'])
+        }catch(error){
+            throw error
+        }
+        
+    })
+
+    it('should reset the data',async function(){
+           let name1 = 'Londeka';
+        let name2 = 'Kelly'
+        let language = 'Sotho';
+        try{
+            await user.greetedFunction(name1,language);
+        await user.greetedFunction(name2,language);
+       let userCount = await user.getUserCount(name);
+        await user.reset()
+        assert.equal(userCount, 0);
+        
+        }catch(error){
+            throw error
+        }
+        
+       
     })
     
-    it('should keep a count of English greetings', function(){
-        var greeter = Greeting();
-        greeter.greetFunction('Nsovo', 'Sotho')
-        greeter.greetFunction('Lala', 'Sotho')
-        greeter.greetFunction('Nate','Sotho')
-        greeter.greetFunction('Londeka','Sotho')
-            greeter.greetedFunction('Nsovo');
-            greeter.greetedFunction('Lala');
-            greeter.greetedFunction('Nate');
-            greeter.greetedFunction('Londeka');
-
-        assert.equal(greeter.getCounter(), 4)
+    after(function(){
+        db.$pool.end
     })
-
-    it('should keep a count of all greetings', function(){
-        var greeter = Greeting();
-        greeter.greetFunction('Nsovo', 'Swati')
-        greeter.greetFunction('Lala', 'Sotho')
-        greeter.greetFunction('Nate','English')
-        greeter.greetFunction('Londeka','Swati')
-            greeter.greetedFunction('Nsovo');
-            greeter.greetedFunction('Lala');
-            greeter.greetedFunction('Nate');
-            greeter.greetedFunction('Londeka');
-
-        assert.equal(greeter.getCounter(), 4)
-    })
-
-
+    
 })
     
 
