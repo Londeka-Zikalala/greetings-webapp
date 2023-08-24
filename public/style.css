@@ -33,9 +33,10 @@ a {
 }
 .input-greet{
   display:inline-flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items:center;
-  margin-left: 15%;
+  margin-left:15%;
+  width: 70%;
 }
 p{
   font-weight: 900;
