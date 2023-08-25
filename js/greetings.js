@@ -12,23 +12,27 @@ export default function Greeting() {
 
   function errorMessages(name, language) {
     let transformedName = inputString(name);
-
+   
     if (transformedName === "" && language === undefined) {
       errorMessage = "Select a language and enter a valid string (No numbers or charecters)";
+      message = "";
 
     }
     else if (transformedName && language === undefined) {
       errorMessage = "Please select a language";
+      message = "";
 
 
     }
     else if (!transformedName) {
       errorMessage = "Enter a valid string (No numbers or charecters)";
+      message = "";
 
     }
-
+    
     else {
       errorMessage = ""
+      message
     }
 
   }

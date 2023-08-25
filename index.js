@@ -46,6 +46,7 @@ app.post('/greet', async (req, res) => {
     
     const  timesGreeted = user.getCounter();
     let errorMessage= greeting.getErrorMessage();
+    
 
     
     res.render('index', {
