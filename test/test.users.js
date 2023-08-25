@@ -1,39 +1,42 @@
 import assert from "assert"
 import usersTable from "../service/users.js"
-
-
-
+import db from "../db.js"
    
 describe('The users Table', async function(){
-    let user = usersTable(db);
+    let user;
+
     beforeEach(async function(){
-        await db.none("delete from users")
+        await db.none("delete from greetings_schema.users")
+        user = usersTable(db);
         await user.reset();
+        
     })
-    done();
+    done()
 
     it('should add a new user and increment the greet count',async function(){
         
     let name = 'Londeka';
     let language = 'Sotho';
-
-    let result = await user.greetedFunction(name, language);
-    let userCount = await user.getUserCount(name);
-    let counter = user.getCounter();
-
-    assert.isTrue(result);
-    assert.equal(userCount, 1);
-    assert.equal(counter, 1);
- 
+        
+            let result = await user.greetedFunction(name, language);
+            let userCount = await user.getUserCount(name);
+            let counter = user.getCounter();
+        
+            assert.isTrue(result);
+            assert.equal(userCount, 1);
+            assert.equal(counter, 1);
+         
+    
 
     })
 
     it('should keep count of existing user greetings', async function(){
         let name = 'Londeka';
         let language = 'Sotho';
-     
+   
         await user.greetedFunction(name,language);
         assert.equal(await user.getUserCount(name), 1)
+  
        
     })
 
@@ -42,11 +45,12 @@ describe('The users Table', async function(){
         let name1 = 'Londeka';
         let name2 = 'Kelly'
         let language = 'Sotho';
-        
+      
             await user.greetedFunction(name1,language);
-        await user.greetedFunction(name2,language);
-
-        assert.deepEqual(await user.getGreetedName(), ['londeka', 'kelly'])
+            await user.greetedFunction(name2,language);
+    
+            assert.deepEqual(await user.getGreetedName(), ['londeka', 'kelly'])
+      
        
         
     })
@@ -56,19 +60,18 @@ describe('The users Table', async function(){
         let name2 = 'Kelly'
         let language = 'Sotho';
        
-            await user.greetedFunction(name1,language);
+        await user.greetedFunction(name1,language);
         await user.greetedFunction(name2,language);
-       let userCount = await user.getUserCount(name);
+       let userCount = await user.getUserCount([name1, name2]);
         await user.reset()
         assert.equal(userCount, 0);
         
        
-        
-       
     })
-    
+   
     after(function(){
         db.$pool.end
+       
     })
     
 })
